@@ -1,0 +1,24 @@
+// Shared demo geometry and imports: see the compiled IntegrationExamples source.
+
+struct DirectionsLoadingExample: View {
+    let fetchRoute: @MainActor () async throws -> TrailRoute
+    // These are validated bundled coordinates. Handle external-coordinate errors at your input boundary.
+    @State private var transition = try! TrailRouteTransitionState(
+        from: ExampleGeometry.route.coordinates.first!, to: ExampleGeometry.route.coordinates.last!
+    )
+    private var effect: TrailEffect { TrailEffect {
+        Stroke(.blue, width: 6)
+        if transition.phase == .loading { Animate(TrailAnimations.loading()) }
+        else if transition.phase == .ready { Reveal(duration: .seconds(2)) }
+    } }
+    var body: some View {
+        TrailMap(route: transition.route, effect: effect)
+            .trailRouteTransition(transition)
+            .task {
+                let request = transition.request
+                do { try transition.resolve(request, route: await fetchRoute()) }
+                catch is CancellationError { transition.cancel(request) }
+                catch { transition.fail(request) } // App presents its error/retry UI.
+            }
+    }
+}

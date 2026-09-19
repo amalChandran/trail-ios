@@ -1,0 +1,20 @@
+# Trail Swift — integration contract
+
+Status: 2.0.0-alpha02 local candidate. The target public URL is https://github.com/amalChandran/trail-ios; publication/tagging is pending.
+Use the root Package.swift. iOS 17+, Swift tools 6.0. Products: TrailCore, TrailUI, TrailMapKit; TrailEffects optional. No external dependencies.
+
+Canonical effect syntax:
+let effect = TrailEffect { Stroke(.blue, width: 6); Reveal(duration: .seconds(2)) }
+TrailMap(route: route, effect: effect)
+TrailCanvas(path: path, effect: effect)
+
+- Read docs/examples/iOS.md; generated examples compile in Examples/TrailPlayground.
+- Existing maps: TrailMapContent(geometry:playback:) inside Map { }, .trailPlayback(playback) on the Map. For patterned styles supply Mercator meters per point from visible rect / viewport width. Solid reveals need no scale estimate.
+- One @State TrailPlayback per binding; share immutable effects, not mutable players. play/pause/replay/seek(to:) are explicit.
+- TrailRoute coordinates are geographic and preserve intermediate vertices. direct/arc/greatCircle are visual geometry, not directions-service requests. Handle throwing external coordinate/route validation.
+- TrailRouteTransitionState captures a request token. resolve(_:route:), fail(_:) and cancel(_:) cannot mutate a newer request with an old token. Apply .trailRouteTransition(state). App owns fetching, errors and retries.
+- Plugins: TrailLineStyle.draw(in:) records bounded commands; TrailAnimation.sample(at:) is pure, deterministic and Sendable. No registration, timers, SDK references or fetches in plugins.
+- Explicit Layer and Sequence only. Duplicate styles/animations are configuration errors. TrailEffect.validating handles structural errors when recovery is needed.
+- MapKit/Google/other providers stay in optional adapters. Geometry/effect/playback types do not contain provider SDK types.
+- TrailMapOverlay, TrailMapAttachment and TrailProjectedOverlay are advanced screen-space APIs; they have separate timing from a map renderer and must not be described as the default anchored-map path.
+- Artwork and the demo are not installed with a package product. No Canvas/map mockups should be presented as native screenshots.
