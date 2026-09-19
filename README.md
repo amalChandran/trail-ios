@@ -56,6 +56,8 @@ Vehicle images are supplied by the app, not bundled into the SDK. The example ca
 
 ## Build and verify
 
+[Step-by-step example flows](docs/LOCAL_TESTING.md)
+
 ```sh
 ./scripts/check.sh
 ./scripts/run-ios.sh
@@ -68,3 +70,5 @@ The validated Swift package has 1,269 passing cases; native iOS has 57 renderer/
 [LLM integration contract](llms.txt) · [API rules](docs/API_GUIDE.md) · [Native maps](docs/MAPS.md) · [MIT license](license.md)
 
 Kotlin/Android continues in `amalChandran/trail-android`. This package has its own sources, tests, native example app and CI. Shared fixture schema 1 is checked in explicitly; changes are coordinated across releases, without adding a runtime cross-platform dependency.
+
+Trail Studio in `Examples/` is a local example application, not an App Store release.

@@ -1,6 +1,6 @@
 # Executed release-candidate verification
 
-Local results, 2026-09-20; no remote CI run or store upload is implied.
+Local results, 2026-09-20; no remote CI run or SDK publication is implied.
 
 | Suite | Passing cases | Scope |
 | --- | ---: | --- |
@@ -15,7 +15,7 @@ Local results, 2026-09-20; no remote CI run or store upload is implied.
 
 Counts come from Kotlin JUnit XML and native test logs, not numbers of assertions or source methods. The 720 shared language-neutral fixture IDs run independently in Kotlin and Swift. A 1001-sample sweep counts as one test, not 1001.
 
-Before separation, the combined `check.sh` passed example/fixture synchronization, Kotlin suites, debug build/lint and Swift package tests. This repository’s `check.sh` runs Swift checks independently. Release preparation additionally ran optimized APK/AAB creation, release lint and Maven staging. A separate Android consumer app compiled with only staged public Maven coordinates plus its platform dependency. Swift package consumption and repository-export checks are recorded with the independent Swift checkout.
+Before separation, the combined `check.sh` passed example/fixture synchronization, Kotlin suites, debug build/lint and Swift package tests. This repository’s `check.sh` runs Swift checks independently. SDK preparation additionally ran optimized APK creation, release lint and Maven staging. A separate Android consumer app compiled with only staged public Maven coordinates plus its platform dependency. Swift package consumption and repository-export checks are recorded with the independent Swift checkout.
 
 Android used emulator-5554 with a configured local Maps key. The Google native-snapshot regression verified magenta route and cyan vehicle pixels at expected geographic anchors under 12 camera configurations; route points and the marker are real map SDK content. Existing projection tests remain coverage for the explicitly advanced screen overlays.
 
@@ -23,7 +23,7 @@ iOS used the iPhone 17 Pro / iOS 26.2 simulator, Xcode 26.2. The initial increme
 
 Native GIFs are actual recordings, with map attribution preserved. They illustrate appearance and behavior; they are not frame-time benchmarks.
 
-Outstanding release acceptance: existing-production upgrade with the real upload/app-signing identity, correct highest version code, release Maps restrictions, physical devices/performance/accessibility, latest resolved SDK privacy declarations, and owner review of store metadata. These need release-account/device access and are not represented as completed.
+Remaining SDK acceptance includes physical-device performance and accessibility, and fresh remote consumer resolution after publication. The sample apps are local examples; store release, store signing and store metadata are out of scope.
 
 ## Independent repository verification
 
