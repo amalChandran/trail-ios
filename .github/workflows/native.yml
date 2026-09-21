@@ -28,3 +28,16 @@ jobs:
           path: |
             artifacts/*tests.*
             Examples/build/*.xcresult
+  compatibility:
+    runs-on: macos-15
+    timeout-minutes: 20
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile the public iOS API with Swift 6.1
+        run: >-
+          xcodebuild -project Examples/TrailPlayground.xcodeproj -scheme TrailPlayground
+          -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath Examples/build/compatibility CODE_SIGNING_ALLOWED=NO
+          build-for-testing -quiet

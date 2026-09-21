@@ -118,11 +118,12 @@ private struct NativePlaybackModifier: ViewModifier {
     @Environment(\.accessibilityReduceMotion) private var reduced
     @State private var visible = false
     func body(content: Content) -> some View {
-        content.background(TrailDisplayDriver(playback: playback,
+        let screenBounds = UIScreen.main.bounds
+        return content.background(TrailDisplayDriver(playback: playback,
             active: active && visible && phase == .active && !reduced && !forceReducedMotion && playback.isPlaying))
             .onGeometryChange(for: Bool.self) { proxy in
                 let frame = proxy.frame(in: .global)
-                return !frame.isEmpty && frame.intersects(UIScreen.main.bounds)
+                return !frame.isEmpty && frame.intersects(screenBounds)
             } action: { visible = $0 }
     }
 }
