@@ -1,14 +1,16 @@
 # Install and release Trail for iOS
 
-`2.0.0-alpha02` is a local release candidate. The public `amalChandran/trail-ios` repository and tag still need publication. GitHub CLI has no signed-in account in the preparation environment.
+Source is available in [amalChandran/trail-ios](https://github.com/amalChandran/trail-ios). `2.0.0-alpha02` is an untagged candidate; the first versioned release remains pending.
 
 Use Xcode → Add Package Dependencies → Add Local → this repository now. The root `Package.swift` exposes **TrailMapKit**, **TrailUI**, **TrailEffects**, **TrailCore**, and the optional sample plugin. Pick only the products you use; there are no external package dependencies. Requires iOS 17+ / macOS 14+ and Swift tools 6.0.
 
-After remote publication and tagging, add `https://github.com/amalChandran/trail-ios` in Xcode, or declare:
+To try the current source, add `https://github.com/amalChandran/trail-ios` in Xcode and choose the **main** branch, or declare:
 
 ```swift
-.package(url: "https://github.com/amalChandran/trail-ios", exact: "2.0.0-alpha02")
+.package(url: "https://github.com/amalChandran/trail-ios", branch: "main")
 ```
+
+Keep `Package.resolved` in your app for repeatable branch-based builds. A versioned dependency can replace the branch after the first release tag.
 
 The sample app in `Examples/` consumes the root package as a separate Xcode project. `scripts/check.sh` validates generated examples, shared fixtures and Swift tests. `scripts/test-ios.sh` builds and runs native/UI tests. `scripts/release/measure-ios.sh` compares independently built device release consumers with and without Trail.
 

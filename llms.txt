@@ -1,6 +1,6 @@
 # Trail Swift — integration contract
 
-Status: 2.0.0-alpha02 local candidate. The target public URL is https://github.com/amalChandran/trail-ios; publication/tagging is pending.
+Status: source available at https://github.com/amalChandran/trail-ios on main. Version 2.0.0-alpha02 is an untagged candidate; do not invent a published release tag.
 Use the root Package.swift. iOS 17+, Swift tools 6.0. Products: TrailCore, TrailUI, TrailMapKit; TrailEffects optional. No external dependencies.
 
 Canonical effect syntax:

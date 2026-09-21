@@ -24,7 +24,7 @@ These declarations come from the compiled integration examples. See [Android exa
 
 ## Local adoption
 
-Trail 2 artifacts are staged locally; public publication is pending. See [distribution](DISTRIBUTION.md) for the verified Maven consumer flow and independent Swift package. The Android playground consumes Gradle project modules; open `android/` to run or adapt it. A Compose consumer uses `trail-compose`, which includes the core and Canvas adapter transitively. A View consumer uses `trail-android` and sets `TrailView.path` and `TrailView.effect`. Add `trail-effects` for the larger preset catalog or `trail-google-maps` for that provider. Material and the gallery belong to the sample app.
+Android artifacts are staged locally; Maven Central publication is pending. The Swift source is available from the independent trail-ios main branch, with a versioned tag pending. See [distribution](DISTRIBUTION.md) for the verified Maven consumer flow and independent Swift package. The Android playground consumes Gradle project modules; open `android/` to run or adapt it. A Compose consumer uses `trail-compose`, which includes the core and Canvas adapter transitively. A View consumer uses `trail-android` and sets `TrailView.path` and `TrailView.effect`. Add `trail-effects` for the larger preset catalog or `trail-google-maps` for that provider. Material and the gallery belong to the sample app.
 
 For Swift, add the repository root as a local Swift package in Xcode. Select `TrailUI` for a SwiftUI Canvas or `TrailMapKit` for maps; `TrailEffects` is optional. A plugin needs only `TrailCore`. `TrailSamplePlugin` demonstrates an independent consumer and is not required by the engine.
 

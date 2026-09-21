@@ -4,7 +4,7 @@
 
 Trail renders on SwiftUI Canvas and native Apple Maps. Reuse named effects, add styles with ordinary protocols, and move between map providers without putting a provider SDK into your geometry or animation code.
 
-`2.0.0-alpha02` is a local release candidate. The independent `trail-ios` repository and first public SPM tag are prepared for publication; neither is claimed live yet. Add this directory as a local Swift package in Xcode to try it now.
+The source is available in the independent [trail-ios repository](https://github.com/amalChandran/trail-ios). `2.0.0-alpha02` is an untagged SDK candidate. Try the `main` branch through Swift Package Manager or add a local checkout in Xcode; a versioned release is still pending.
 
 ## Actual Apple Maps rendering
 
@@ -18,11 +18,13 @@ The cab keeps all 119 points of a captured road route. Flight/ferry tracks are i
 
 Xcode → **Add Package Dependencies** → **Add Local** → this repository. Choose **TrailMapKit** for maps or **TrailUI** for Canvas. **TrailEffects** is optional; plugin authors need **TrailCore**. There are no external package dependencies. Requires iOS 17+ and Swift tools 6.0; also compiles on macOS 14+.
 
-After remote publication and tagging, paste `https://github.com/amalChandran/trail-ios` into Xcode, or use:
+To try the current source, paste `https://github.com/amalChandran/trail-ios` into Xcode and select the **main** branch, or use:
 
 ```swift
-.package(url: "https://github.com/amalChandran/trail-ios", exact: "2.0.0-alpha02")
+.package(url: "https://github.com/amalChandran/trail-ios", branch: "main")
 ```
+
+For repeatable builds, keep `Package.resolved` in your app. Select a versioned dependency once the first release tag exists.
 
 ## Describe the result
 
