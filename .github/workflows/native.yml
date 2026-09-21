@@ -1,12 +1,24 @@
 name: Native Swift
 on: [push, pull_request]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
   swift:
     runs-on: macos-15
+    timeout-minutes: 30
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.2.app/Contents/Developer
     steps:
       - uses: actions/checkout@v4
+      - name: Use the validated Xcode and simulator
+        run: |
+          xcodebuild -version
+          swift --version
+          TRAIL_SIM=$(xcrun simctl create "Trail CI" com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro com.apple.CoreSimulator.SimRuntime.iOS-26-2)
+          echo "TRAIL_IOS_SIMULATOR=$TRAIL_SIM" >> "$GITHUB_ENV"
       - run: ./scripts/check.sh
       - run: ./scripts/test-ios.sh
       - uses: actions/upload-artifact@v4
