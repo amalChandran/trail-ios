@@ -13,10 +13,12 @@ These are recordings of the actual SwiftUI / MapKit example app. Map attribution
 
 Build/install the debug example with `scripts/run-ios.sh`. For each of `flight`, `cab` and `ferry`, start `xcrun simctl io "$TRAIL_SIM" recordVideo --codec=h264 recording.mp4`, then launch with `xcrun simctl launch --terminate-running-process "$TRAIL_SIM" dev.trail.playground --trail-journey cab` (substitute the journey). Record at least two cycles; stop recording with SIGINT. The launch argument belongs to the debug example, not the SDK.
 
-The 2026-09-21 recordings use an iPhone 17 Pro simulator at 1206×2622. A settled cycle is cropped to `1110:1300:48:640`, preserving the journey title, whole map, Apple attribution and point count, then scaled to 560 px wide at 16 fps. The flight/cab/ferry excerpts start at 19/21/24 seconds and last 16/18/20 seconds respectively. FFmpeg uses `palettegen=stats_mode=diff` and `paletteuse=dither=sierra2_4a`. Choose crop and timestamps again if the device or layout changes.
+The 2026-09-21 recordings use an iPhone 17 Pro simulator at 1206×2622. A settled cycle is cropped to `1110:1300:48:640`, preserving the journey title, whole map, Apple attribution and point count, then scaled to 560 px wide at 16 fps. The flight/cab/ferry excerpts start at 19/21/24 seconds and last 16/18/20 seconds respectively. FFmpeg uses `palettegen=stats_mode=diff` and `paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle`. Choose crop and timestamps again if the device or layout changes.
 
 The loading GIF was recorded during the passing native loading/gesture UI flow. It is cropped to the map and loading controls and holds its last real frame briefly. The still PNGs are retained as supplemental screenshots; README journey previews use animated GIFs.
 
 Original videos are kept in ignored `artifacts/`. Run `python3 scripts/release/verify-media.py` to check that referenced GIFs exist and contain multiple frames. These recordings explain behavior; their downsampled frame rate is not a performance benchmark.
 
 Journey data and licensing: [samples](../../samples/README.md). Android recordings and native Google integration: [Trail for Android](https://github.com/amalChandran/trail-android).
+
+Ordered dithering keeps static map pixels stable between GIF frames, reducing the preview download without changing the source recording, dimensions or duration. These media files are documentation assets, not SDK resources.
